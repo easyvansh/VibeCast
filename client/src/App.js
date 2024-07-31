@@ -4,6 +4,8 @@ import {ThemeProvider} from "styled-components";
 import "./index.css";
 import {lightTheme, darkTheme} from "./utils/Theme"
 import Sidebar from "./components/Sidebar";
+import { BrowserRouter } from "react-router-dom";
+
 
 const Container = styled.div`
   display:flex;
@@ -19,10 +21,12 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   return (
     <ThemeProvider theme ={darkMode ? darkTheme : lightTheme}>
+      <BrowserRouter>
       <Container>
         <Sidebar/>
         VibeCast
       </Container>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

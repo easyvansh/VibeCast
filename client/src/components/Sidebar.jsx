@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import TroubleshootRoundedIcon from '@mui/icons-material/TroubleshootRounded';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
+import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import PodcastsRoundedIcon from '@mui/icons-material/PodcastsRounded';
 import{ Link} from "react-router-dom";
 
@@ -55,16 +60,62 @@ const Elements = styled.div`
   gap: 12px;
   cursor: pointer;
   color: ${({ theme }) => theme.text_secondary};
-  width: 100%;
+  text-decoration:none;
   &:hover {
-    background-color: ${({ theme }) => theme.text_secondary};
+    background-color: ${({ theme }) => theme.text_secondary+50};
     color: ${({ theme }) => theme.text_primary};
   }
 `;
 
 const NavText = styled.div`
   padding: 12px 0px;
+  text-decoration:none;
 `;
+
+const HR = styled.div`
+  width:100%;
+  height:1px;
+  background-color: ${({ theme }) => theme.text_secondary+50};
+  margin:10px 0px;
+`;
+
+
+const menuItems = [
+  {
+    link: "/",
+    name: "Dashboard",
+    icon:<HomeRoundedIcon/>
+  },
+  {
+    link: "/search",
+    name: "Search",
+    icon:< TroubleshootRoundedIcon />
+  },
+  {
+    link: "/favourites",
+    name: "Favourites",
+    icon:<FavoriteBorderRoundedIcon/>
+  },
+]
+
+const buttons = [
+  {
+    fun: () => console.log("upload"),
+    name: "Upload",
+    icon:<FileUploadRoundedIcon/>
+  },
+  {
+    fun: () => console.log("lightmode"),
+    name: "LightMode",
+    icon:<LightModeRoundedIcon/>
+  },
+  {
+    fun: () => console.log("logout"),
+    name: "LogOut",
+    icon:<LogoutRoundedIcon/>
+  },
+]
+
 
 function Sidebar() {
   return (
@@ -77,13 +128,31 @@ function Sidebar() {
           <CloseRoundedIcon />
         </Close>
       </Flex>
-      <Link to = "/">
+      {
+      menuItems.map((item) => (
+
+      <Link to = {item.link} style ={{textDecoration:"none"}}>
       <Elements>
-        <HomeRoundedIcon />
-        <NavText>DashBoard</NavText>
+        {item.icon}
+        <NavText>{item.name}</NavText>
       </Elements>
       </Link>
+      ))
+      }
+
+      <HR/>
       
+      {
+      buttons.map((item) => (
+
+      
+      <Elements onClick = {item.fun}>
+        {item.icon}
+        <NavText>{item.name}</NavText>
+      </Elements>
+      
+      ))
+      }
     </MenuContainer>
   );
 }

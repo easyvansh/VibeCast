@@ -6,12 +6,15 @@ import TroubleshootRoundedIcon from '@mui/icons-material/TroubleshootRounded';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
+import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import PodcastsRoundedIcon from '@mui/icons-material/PodcastsRounded';
 import{ Link} from "react-router-dom";
 
+
 const MenuContainer = styled.div`
-    flex:0.3;
+    flex:0.5;
+    width:100%;
     flex-direction:column;
     height:100vh;
     display:flex;
@@ -22,7 +25,7 @@ const MenuContainer = styled.div`
     z-index:1000;
     width:100%;
     max-width:250px;
-    left:${({ setMenuOpen }) => (setMenuOpen ? "0" : "-100")}
+    left:${({ menuOpen }) => (menuOpen ? "0" : "-100%")}
     transition:0.3s ease-in-out;
   }`;
 
@@ -30,10 +33,10 @@ const Flex = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0px 12px;
 `;
 const Logo = styled.div`
-  width: 100%;
   color: ${({ theme }) => theme.primary};
   display: flex;
   align-items: center;
@@ -42,6 +45,7 @@ const Logo = styled.div`
   font-weight: bold;
   font-size: 24px;
   margin: 16px 0px;
+  padding: 0px 12px;
 `;
 
 const Close = styled.div`
@@ -98,33 +102,37 @@ const menuItems = [
   },
 ]
 
-const buttons = [
-  {
-    fun: () => console.log("upload"),
-    name: "Upload",
-    icon:<FileUploadRoundedIcon/>
-  },
-  {
-    fun: () => console.log("lightmode"),
-    name: "LightMode",
-    icon:<LightModeRoundedIcon/>
-  },
-  {
-    fun: () => console.log("logout"),
-    name: "LogOut",
-    icon:<LogoutRoundedIcon/>
-  },
-]
 
 
-function Sidebar() {
-  return (
-    <MenuContainer>
+const Sidebar = ({
+  menuOpen,
+  setMenuOpen ,
+  setDarkMode ,
+  darkMode})=>{
+    const buttons = [
+      {
+        fun: () => console.log("upload"),
+        name: "Upload",
+        icon:<FileUploadRoundedIcon/>
+      },
+      {
+        fun: () => setDarkMode(!darkMode),
+        name:darkMode? "Light Mode":"Dark Mode",
+        icon:darkMode? <LightModeRoundedIcon/>:<DarkModeRoundedIcon/>
+      },
+      {
+        fun: () => console.log("logout"),
+        name: "LogOut",
+        icon:<LogoutRoundedIcon/>
+      },
+    ]
+    return (
+      <MenuContainer menuOpen = {menuOpen}>
       <Flex>
         <Logo>
           <PodcastsRoundedIcon fontSize="large"/>
           VibeCast</Logo>
-        <Close>
+        <Close onClick = {()=>setMenuOpen(false)}>
           <CloseRoundedIcon />
         </Close>
       </Flex>

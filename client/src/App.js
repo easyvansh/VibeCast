@@ -4,8 +4,14 @@ import {ThemeProvider} from "styled-components";
 import "./index.css";
 import {lightTheme, darkTheme} from "./utils/Theme"
 import Sidebar from "./components/Sidebar";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Dashboard from "./pages/Dashboard";
+import Search from "./pages/Search";
+import Favourites from "./pages/Favourites";
+import Profile from "./pages/Profile";
+import PodcastDetails from "./pages/PodcastDetails";
+import DisplayPodcast from "./pages/DisplayPodcast";
 
 
 const Container = styled.div`
@@ -44,6 +50,14 @@ function App() {
           setMenuOpen = {setMenuOpen}
           />
         VibeCast
+        <Routes>
+        <Route path='/' exact element={<Dashboard />} />
+        <Route path='/search' exact element={<Search />} />
+        <Route path='/favourites' exact element={<Favourites />} />
+        <Route path='/profile' exact element={<Profile />} />
+        <Route path='/podcast/:id' exact element={<PodcastDetails />} />
+        <Route path='/showpodcasts/:type' exact element={<DisplayPodcast/>} />
+        </Routes>
         </Frame>
       </Container>
       </BrowserRouter>

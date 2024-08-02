@@ -20,14 +20,26 @@ const MenuContainer = styled.div`
     display:flex;
     background-color:${({ theme }) => theme.bg};
     color: ${({ theme }) => theme.text_primary};
-    @media(max-width:1024px){
+    @media(max-width:1100px){
     position:fixed;
     z-index:1000;
     width:100%;
     max-width:250px;
-    left:${({ menuOpen }) => (menuOpen ? "0" : "-100%")}
+    left: ${({ menuOpen }) => (menuOpen ? "0" : "-100%")};
     transition:0.3s ease-in-out;
   }`;
+
+const Logo = styled.div`
+    color: ${({ theme }) => theme.primary};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 16px 0px;
+    padding: 0px 16px;
+  `;
 
 const Flex = styled.div`
   display: flex;
@@ -36,20 +48,10 @@ const Flex = styled.div`
   justify-content: space-between;
   padding: 0px 12px;
 `;
-const Logo = styled.div`
-  color: ${({ theme }) => theme.primary};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-weight: bold;
-  font-size: 24px;
-  margin: 16px 0px;
-  padding: 0px 12px;
-`;
 
 const Close = styled.div`
   display: none;
+  padding: 0px 12px;
   @media (max-width: 1100px) {
     display: block;
   }
@@ -131,9 +133,10 @@ const Sidebar = ({
       <Flex>
         <Logo>
           <PodcastsRoundedIcon fontSize="large"/>
-          VibeCast</Logo>
-        <Close onClick = {()=>setMenuOpen(false)}>
-          <CloseRoundedIcon />
+          VibeCast
+        </Logo>
+        <Close >
+          <CloseRoundedIcon onClick={() => setMenuOpen(false)} style={{ cursor: "pointer" }}/>
         </Close>
       </Flex>
       {

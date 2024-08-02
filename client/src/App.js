@@ -5,6 +5,7 @@ import "./index.css";
 import {lightTheme, darkTheme} from "./utils/Theme"
 import Sidebar from "./components/Sidebar";
 import { BrowserRouter } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 
 const Container = styled.div`
@@ -30,12 +31,18 @@ function App() {
     <ThemeProvider theme ={darkMode ? darkTheme : lightTheme}>
       <BrowserRouter>
       <Container>
+        {menuOpen && (
         <Sidebar 
         menuOpen={menuOpen}
         setMenuOpen = {setMenuOpen}
         setDarkMode = {setDarkMode}
         darkMode = {darkMode}/>
+        )}
         <Frame>
+          <Navbar
+          menuOpen={menuOpen}
+          setMenuOpen = {setMenuOpen}
+          />
         VibeCast
         </Frame>
       </Container>
